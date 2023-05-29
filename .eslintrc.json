@@ -1,11 +1,3 @@
 {
-  "parser": "babel-eslint",
-  "extends": [
-    "next/core-web-vitals",
-    "plugin:next/recommended",
-    "plugin:prettier/recommended"
-  ],
-  "rules": {
-    "prettier/prettier": "error"
-  }
+  "extends": "next/core-web-vitals"
 }
