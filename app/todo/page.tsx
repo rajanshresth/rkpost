@@ -1,4 +1,4 @@
-import prisma from "@/prisma/prisma";
+import prisma from "@/prisma";
 import { Post } from "@prisma/client";
 import Create from "./create";
 
