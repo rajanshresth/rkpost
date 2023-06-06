@@ -1,30 +1,27 @@
-"use client"
+"use client";
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-interface createProps {
-  
-}
+interface createProps {}
 
-const Create:createProps=  ({}) => {
-    const router = useRouter();
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
-    const submitData = async (e: React.SyntheticEvent) => {
-      e.preventDefault();
-      let response = await fetch("http://localhost:3000/todo/api", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ title, content }),
-      });
-
-      let data = await response.json();
-      return data;
-      //   router.refresh();
-    };
+const Create: createProps = ({}) => {
+  const router = useRouter();
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const submitData = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    await fetch("http://localhost:3000/todo/api", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title, content }),
+    }).catch((err) => console.log(err));
+    router.refresh();
+    setTitle("");
+    setContent("");
+  };
 
   return (
     <div>
@@ -53,9 +50,10 @@ const Create:createProps=  ({}) => {
         >
           Create
         </button>
+        {/* delete button to delete specific post */}
       </form>
     </div>
   );
-}
+};
 
-export default Create
+export default Create;

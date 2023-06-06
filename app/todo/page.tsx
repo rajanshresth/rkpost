@@ -1,33 +1,32 @@
-import prisma from "@/prisma";
 import { Post } from "@prisma/client";
-import Create from "./create";
+import Create from "../components/create";
+import { prisma } from "@/prisma";
+import TodoItem from "../components/todo";
 
-interface pageProps {}
+interface pageProps {
+  data: Post[];
+}
 type Item = {
   id: number;
   title: string;
   content: string;
+  task: string;
 };
 
-const getData = async () => {
-  const allPosts: Post[] = await prisma.post.findMany();
-  return allPosts;
-};
-
-const page: ({}: pageProps) => Promise<JSX.Element> = async ({}) => {
-  const data = await getData();
+const page: ({}: pageProps) => Promise<JSX.Element> = async () => {
+  const getData = async () => {
+    const allPosts: Post[] = await prisma.post.findMany();
+    return allPosts;
+  };
+  const todo = await getData();
   return (
     <div>
       {/* @ts-ignore */}
       <Create />
-      <h1>
-        {data.map((item: Item) => (
-          <div key={item.id} className="flex flex-rows gap-3">
-            <h1>{item.title}</h1>
-            <p>{item.content}</p>
-          </div>
-        ))}
-      </h1>
+      {/* @ts-ignore */}
+      {todo.map((todo: Item) => {
+        return <TodoItem todo={todo} key={todo.id} />;
+      })}
     </div>
   );
 };

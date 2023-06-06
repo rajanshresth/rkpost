@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
-export default prisma;
+import useAccelerate from "@prisma/extension-accelerate";
+
+export const prisma = new PrismaClient().$extends(useAccelerate);
 
 async function main() {
   const getPost = await prisma.post.findMany();

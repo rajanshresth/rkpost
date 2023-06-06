@@ -2,8 +2,10 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main>
-      <Link href={"./todo"}>Todo</Link>
+    <main className="font-bold text-3xl text-center">
+      <Link href={"./todo"} className="font-bold text-3xl text-center">
+        Todo
+      </Link>
     </main>
   );
 }
