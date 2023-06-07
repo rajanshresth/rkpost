@@ -1,19 +1,10 @@
-import { FC } from "react";
-import BlogPage from "./blog/page";
-import { Todo } from "./components/todo";
+import Link from "next/link";
 
-interface pageProps {
-  todo: Todo;
-}
-
-const Home: FC<pageProps> = ({ todo }) => {
+export default function Home() {
   return (
-    <div>
-      <h1>Home</h1>
-      {/* @ts-ignore */}
-      <BlogPage todo={todo} />
-    </div>
+    <main className="font-bold text-3xl text-center">
+      <h1 className="text-5xl">Welcome to the Blog App</h1>
+      <Link href="/blog">Go to Blog-Post</Link>
+    </main>
   );
-};
-
-export default Home;
+}

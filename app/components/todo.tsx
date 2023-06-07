@@ -3,7 +3,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import PostEdit from "./postEdit";
 
-export type Todo = {
+type Todo = {
   id: number;
   title: string;
   content: string;
@@ -46,8 +46,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
       >
         Delete
       </button>
-      {/* when i click this button i want to replace a form with the title and content of the new or modified todo item */}
-      {/*@ts-ignore */}
+      {/* @ts-ignore */}
       <PostEdit todo={todo} />
     </div>
   );

@@ -14,7 +14,7 @@ type Item = {
   task: string;
 };
 
-const BlogPage: ({}: pageProps) => Promise<JSX.Element> = async () => {
+const Page: ({}: pageProps) => Promise<JSX.Element> = async () => {
   const todo = await prisma.post.findMany();
 
   return (
@@ -29,4 +29,4 @@ const BlogPage: ({}: pageProps) => Promise<JSX.Element> = async () => {
   );
 };
 
-export default BlogPage;
+export default Page;
