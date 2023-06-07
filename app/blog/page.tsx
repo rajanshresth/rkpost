@@ -1,9 +1,32 @@
-import { FC } from "react";
+import { Post } from "@prisma/client";
+import TodoItem from "../components/todo";
+import { prisma } from "@/prisma";
+import Create from "../components/create";
 
-interface pageProps {}
+interface pageProps {
+  data: Post[];
+}
 
-const Page: FC<pageProps> = ({}) => {
-  return <div>page</div>;
+type Item = {
+  id: number;
+  title: string;
+  content: string;
+  task: string;
 };
 
-export default Page;
+const BlogPage: ({}: pageProps) => Promise<JSX.Element> = async () => {
+  const todo = await prisma.post.findMany();
+
+  return (
+    <div>
+      {/* @ts-ignore */}
+      <Create />
+      {/* @ts-ignore */}
+      {todo.map((todo: Item) => {
+        return <TodoItem todo={todo} key={todo.id} />;
+      })}
+    </div>
+  );
+};
+
+export default BlogPage;

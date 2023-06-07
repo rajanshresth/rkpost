@@ -1,5 +1,5 @@
 "use client";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { FC, useState } from "react";
 
 interface UpdateProps {
@@ -11,13 +11,13 @@ interface UpdateProps {
 }
 
 const PostEdit: FC<UpdateProps> = ({ todo }) => {
-  const router = useRouter();
   const [title, setTitle] = useState(todo.title);
   const [content, setContent] = useState(todo.content);
+  const router = useRouter();
 
   const handleUpdate = async () => {
     try {
-      const response = await fetch(`/todo/api/${todo.id}`, {
+      const response = await fetch(`/blog/api/${todo.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -25,8 +25,8 @@ const PostEdit: FC<UpdateProps> = ({ todo }) => {
         body: JSON.stringify({ title, content }),
       });
       const data = await response.json();
-      console.log(data);
-      router.push("/todo");
+      router.refresh();
+      return data;
     } catch (error) {
       console.log(error);
     }
@@ -34,24 +34,18 @@ const PostEdit: FC<UpdateProps> = ({ todo }) => {
 
   return (
     <div>
-      <div>
-        <label htmlFor="title">Title:</label>
-        <input
-          type="text"
-          id="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="content">Content:</label>
-        <textarea
-          id="content"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-        ></textarea>
-      </div>
-      <button onClick={handleUpdate}>Edit Post</button>
+      <input
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        className="text-sm font-bold mb-8 w-full text-black"
+      />
+      <textarea
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+        className="text-sm font-bold mb-8 w-full text-black"
+      ></textarea>
+      <button onClick={handleUpdate}>Save</button>
     </div>
   );
 };

@@ -1,11 +1,19 @@
-import Link from "next/link";
+import { FC } from "react";
+import BlogPage from "./blog/page";
+import { Todo } from "./components/todo";
 
-export default function Home() {
-  return (
-    <main className="font-bold text-3xl text-center">
-      <Link href={"./todo"} className="font-bold text-3xl text-center">
-        Todo
-      </Link>
-    </main>
-  );
+interface pageProps {
+  todo: Todo;
 }
+
+const Home: FC<pageProps> = ({ todo }) => {
+  return (
+    <div>
+      <h1>Home</h1>
+      {/* @ts-ignore */}
+      <BlogPage todo={todo} />
+    </div>
+  );
+};
+
+export default Home;

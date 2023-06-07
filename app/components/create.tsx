@@ -11,7 +11,7 @@ const Create: createProps = ({}) => {
   const [content, setContent] = useState("");
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    await fetch("http://localhost:3000/todo/api", {
+    await fetch("http://localhost:3000/blog/api", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

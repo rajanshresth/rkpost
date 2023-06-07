@@ -35,17 +35,17 @@ export async function POST(request: Request) {
   }
 }
 
-export async function DELETE(request: Request) {
+export async function GET(request: NextRequest) {
   const body = await request.json();
-  const { id } = body;
-
+  const { title, content } = body;
+  if (!title || !content)
+    return NextResponse.json(
+      { message: "title or content is empty" },
+      { status: 400 }
+    );
   try {
-    const resPost = await prisma.post.delete({
-      where: {
-        id: Number(id),
-      },
-    });
-    return NextResponse.json({ resPost }, { status: 201 });
+    const resPost = await prisma.post.findMany();
+    return NextResponse.json({ resPost }, { status: 200 });
   } catch (error) {
     console.log(error);
   }

@@ -3,7 +3,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import PostEdit from "./postEdit";
 
-type Todo = {
+export type Todo = {
   id: number;
   title: string;
   content: string;
@@ -17,24 +17,12 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
   const router = useRouter();
   const deleteTodoHandler = async () => {
     try {
-      const response = await fetch(`/todo/api/${todo.id}`, {
+      const response = await fetch(`/blog/api/${todo.id}`, {
         method: "DELETE",
       });
       const data = await response.json();
       console.log(data);
-      router.push("/todo");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const handleupdate = async () => {
-    try {
-      const response = await fetch(`/todo/api/${todo.id}`, {
-        method: "PUT",
-      });
-      const data = await response.json();
-      console.log(data);
-      router.push("/todo");
+      router.refresh();
     } catch (error) {
       console.log(error);
     }
