@@ -45,7 +45,9 @@ const PostEdit: FC<UpdateProps> = ({ todo }) => {
         onChange={(e) => setContent(e.target.value)}
         className="text-sm font-bold mb-8 w-full text-black"
       ></textarea>
-      <button onClick={handleUpdate}>Save</button>
+      <button onClick={handleUpdate} className="bg-red-400 rounded-xl">
+        Save
+      </button>
     </div>
   );
 };

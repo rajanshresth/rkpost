@@ -1,11 +1,6 @@
-import { Post } from "@prisma/client";
 import TodoItem from "../components/todo";
 import { prisma } from "@/prisma";
 import Create from "../components/create";
-
-interface pageProps {
-  data: Post[];
-}
 
 type Item = {
   id: number;
@@ -14,7 +9,7 @@ type Item = {
   task: string;
 };
 
-const Page: ({}: pageProps) => Promise<JSX.Element> = async () => {
+const page: () => Promise<JSX.Element> = async () => {
   const todo = await prisma.post.findMany();
 
   return (
@@ -29,4 +24,4 @@ const Page: ({}: pageProps) => Promise<JSX.Element> = async () => {
   );
 };
 
-export default Page;
+export default page;
